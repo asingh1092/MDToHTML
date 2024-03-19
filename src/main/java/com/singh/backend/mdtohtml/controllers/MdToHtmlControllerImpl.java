@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
+@EnableAsync
 public class MdToHtmlControllerImpl implements MdToHtmlController {
 
     private final MdToHtmlService mdToHtmlService;
@@ -22,8 +23,8 @@ public class MdToHtmlControllerImpl implements MdToHtmlController {
     }
 
     @GetMapping(value = "/")
-    public CompletableFuture<String> hello() {
-        return CompletableFuture.completedFuture("Hello!");
+    public String hello() {
+        return "Hello!";
     }
 
     @Override
