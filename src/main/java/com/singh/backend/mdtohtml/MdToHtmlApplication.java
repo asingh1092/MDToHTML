@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MdtohtmlApplication {
+public class MdToHtmlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MdtohtmlApplication.class, args);
+		SpringApplication.run(MdToHtmlApplication.class, args);
 	}
 
 }

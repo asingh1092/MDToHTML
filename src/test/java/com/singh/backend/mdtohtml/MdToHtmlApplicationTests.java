@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class MdtohtmlApplicationTests {
+class MdToHtmlApplicationTests {
 
 	@Autowired
 	private MdToHtmlService mdToHtmlService;
