@@ -1,20 +1,13 @@
 package com.singh.backend.mdtohtml;
 
-import com.singh.backend.mdtohtml.controllers.MdToHtmlController;
 import com.singh.backend.mdtohtml.services.MdToHtmlService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
