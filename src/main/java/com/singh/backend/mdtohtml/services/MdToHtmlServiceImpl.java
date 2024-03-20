@@ -41,12 +41,27 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
             } else if (line.startsWith("#")) {
                 int headerLevel = 0;
                 while (line.charAt(headerLevel) == '#') {
+                    if (headerLevel > 6) {
+                        headerLevel = -1;
+                        break;
+                    }
                     headerLevel++;
                 }
-                // handle if link text in header
-                sb.append("<h").append(headerLevel).append(">")
-                        .append(handleWithLinkText(line.substring(headerLevel + 1)))
-                        .append("</h").append(headerLevel).append(">");
+                if (headerLevel == -1) {
+                    // special case where # of # is > 6
+                    if (!inParagraph) {
+                        inParagraph = true;
+                        sb.append("<p>");
+                    }
+                    // handle if link text in paragraph
+                    sb.append(handleWithLinkText(line));
+                } else {
+                    // handle if link text in header
+                    sb.append("<h").append(headerLevel).append(">")
+                            .append(handleWithLinkText(line.substring(headerLevel + 1)))
+                            .append("</h").append(headerLevel).append(">");
+                }
+
             } else {
                 // handle text for paragraphs
                 if (!inParagraph) {

@@ -34,6 +34,19 @@ public class MdToHtmlServiceTests {
         // Then
         assertEquals(expectedHtml, actualHtml);
     }
+
+    @Test
+    public void testConvertMarkdownToHtml_special() throws ExecutionException, InterruptedException {
+        // Given
+        String markdown = "############### what";
+        String expectedHtml = "<p>############### what</p>";
+
+        // When
+        String actualHtml = mdToHtmlService.convert(markdown).get();
+
+        // Then
+        assertEquals(expectedHtml, actualHtml);
+    }
     @Test
     public void testConvertMarkdownToHtml() throws ExecutionException, InterruptedException {
         // Given
