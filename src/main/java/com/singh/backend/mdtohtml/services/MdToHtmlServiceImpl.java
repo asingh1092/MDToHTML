@@ -18,8 +18,8 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
 
     /**
      * Converts md content to html looking at a few rules.
-     *      1. headers (h1, h2, h3, etc) with link text potentially
-     *      2. paragraphs with link text pontetially
+     *      1. headers (h1, h2, ..., h6) with link text potentially
+     *      2. paragraphs with link text potentially
      *      3. Handle new lines by either ending a paragraph after a blank new line
      *         or continuing the paragraph if text continues on next line
      *
