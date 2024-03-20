@@ -16,35 +16,45 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
         return CompletableFuture.completedFuture(mdToHtml(content));
     }
 
-    private String mdToHtml(String markdownContent) {
+    /**
+     * Converts md content to html looking at a few rules.
+     *      1. headers (h1, h2, h3, etc) with link text potentially
+     *      2. paragraphs with link text pontetially
+     *      3. Handle new lines by either ending a paragraph after a blank new line
+     *         or continuing the paragraph if text continues on next line
+     *
+     * @param content content in plain text
+     * @return String of formatted html
+     */
+    private String mdToHtml(String content) {
         StringBuilder sb = new StringBuilder();
-        String[] lines = markdownContent.split("\n");
+        String[] lines = content.split("\n");
         boolean inParagraph = false;
 
         for (String line : lines) {
             if (line.trim().isEmpty()) {
+                // handle if empty line or if end of paragraph
                 if (inParagraph) {
                     sb.append("</p>");
                     inParagraph = false;
                 }
-            }
-            else if (line.startsWith("#")) {
+            } else if (line.startsWith("#")) {
                 int headerLevel = 0;
                 while (line.charAt(headerLevel) == '#') {
                     headerLevel++;
                 }
+                // handle if link text in header
                 sb.append("<h").append(headerLevel).append(">")
-                        .append(convertLineToHtml(line.substring(headerLevel + 1)))
+                        .append(handleWithLinkText(line.substring(headerLevel + 1)))
                         .append("</h").append(headerLevel).append(">");
-            }
-            else {
-                // handle text
+            } else {
+                // handle text for paragraphs
                 if (!inParagraph) {
                     inParagraph = true;
                     sb.append("<p>");
                 }
-                // handle if link text in paragraph as well
-                sb.append(convertLineToHtml(line));
+                // handle if link text in paragraph
+                sb.append(handleWithLinkText(line));
             }
         }
         if (inParagraph) {
@@ -53,7 +63,16 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
         return sb.toString();
     }
 
-    private String convertLineToHtml(String line) {
+    /**
+     * Handle text that has any link text.
+     *
+     * This method will match link url, link text, and remaining text, and subsequently build
+     * the String out using StringBuilder.
+     *
+     * @param line the line to handle
+     * @return conversion of line as a String
+     */
+    private String handleWithLinkText(String line) {
         // Replace links and regular text within the same line
         Pattern pattern = Pattern.compile("\\[([^\\]]+)\\]\\(([^\\)]+)\\)|([^\\[]+)");
         Matcher matcher = pattern.matcher(line);
