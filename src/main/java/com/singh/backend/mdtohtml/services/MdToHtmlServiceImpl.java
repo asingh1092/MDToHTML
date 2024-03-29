@@ -67,6 +67,9 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
                 if (!inParagraph) {
                     inParagraph = true;
                     sb.append("<p>");
+                } else {
+                    // TODO Talk about case where we need a break to add to next line
+                    sb.append("<br>");
                 }
                 // handle if link text in paragraph
                 sb.append(handleWithLinkText(line));
