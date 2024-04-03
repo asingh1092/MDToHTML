@@ -1,5 +1,7 @@
 package com.singh.backend.mdtohtml.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import java.util.regex.Pattern;
 @Service
 public class MdToHtmlServiceImpl implements MdToHtmlService {
 
+    private final Logger logger = LoggerFactory.getLogger(MdToHtmlServiceImpl.class);
     @Override
     @Async
     public CompletableFuture<String> convert(String content) {
@@ -27,11 +30,13 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
      * @return String of formatted html
      */
     private String mdToHtml(String content) {
+        logger.debug(content);
         StringBuilder sb = new StringBuilder();
         String[] lines = content.split("\n");
         boolean inParagraph = false;
 
         for (String line : lines) {
+            logger.debug(line);
             if (line.trim().isEmpty()) {
                 // handle if empty line or if end of paragraph
                 if (inParagraph) {
@@ -78,12 +83,13 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
         if (inParagraph) {
             sb.append("</p>");
         }
+        logger.debug(String.valueOf(sb));
         return sb.toString();
     }
 
     /**
      * Handle text that has any link text.
-     *
+
      * This method will match link url, link text, and remaining text, and subsequently build
      * the String out using StringBuilder.
      *
@@ -100,6 +106,7 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
             String linkUrl = matcher.group(2);
             String text = matcher.group(3);
 
+            logger.debug("Linktext= " + linkText + "| LinkUrl= " + linkUrl + "| Text= " + text);
             if (linkText != null) {
                 matcher.appendReplacement(sb, "<a href=\"" + linkUrl + "\">" + linkText + "</a>");
             } else {
