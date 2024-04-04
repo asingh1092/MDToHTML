@@ -91,7 +91,7 @@ public class MdToHtmlServiceTests {
                 "## This is a header [with a link](http://yahoo.com)";
         String expectedHtml = "<h1>Header one" +
                 "</h1><p>Hello there" +
-                "</p><p>How are you?" +
+                "</p><p>How are you?<br>" +
                 "What's going on?" +
                 "</p><h2>Another Header" +
                 "</h2><p>This is a paragraph <a href=\"http://google.com\">with an inline link</a>. Neat, eh?" +
