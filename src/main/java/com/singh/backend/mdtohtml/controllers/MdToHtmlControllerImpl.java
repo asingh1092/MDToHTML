@@ -47,7 +47,6 @@ public class MdToHtmlControllerImpl implements MdToHtmlController {
     @Override
     // TODO Talk about CORS
     @CrossOrigin
-    @Async
     @PostMapping(value = "/convert", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_HTML_VALUE)
     public CompletableFuture<String> convertToHTML(@RequestBody String content) {
         logger.debug("Calling: /markdown/convert");
