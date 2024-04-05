@@ -3,17 +3,17 @@ package com.singh.backend.mdtohtml.model;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Markdown {
+public class MarkdownConverter {
 
     private StringBuilder sb;
 
     // getter setter
     private boolean inParagraph;
-    private Markdown() {
+    private MarkdownConverter() {
         // private no arg constructor
     }
 
-    public Markdown(String content) {
+    public MarkdownConverter(String content) {
         sb = new StringBuilder();
         String[] lines = content.split("\n");
 
