@@ -5,6 +5,14 @@ import java.util.regex.Pattern;
 
 public class MarkdownConverter {
 
+    /*
+       go line by line
+       have a hashmap of beginning chars?
+       start from beginning char and create Node child object (Header, paragraph, etc)
+       go through each char and see if there is an embedded Node child object (like link text or bold, etc)
+
+     */
+
     private StringBuilder sb;
 
     // getter setter
