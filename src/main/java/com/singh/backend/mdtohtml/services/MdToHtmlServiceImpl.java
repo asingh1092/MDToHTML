@@ -1,13 +1,11 @@
 package com.singh.backend.mdtohtml.services;
 
-import com.singh.backend.mdtohtml.model.MarkdownConverter;
+import com.singh.backend.mdtohtml.model.MarkdownConverterOG;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class MdToHtmlServiceImpl implements MdToHtmlService {
@@ -30,7 +28,7 @@ public class MdToHtmlServiceImpl implements MdToHtmlService {
 
     @Override
     public CompletableFuture<String> convert(String content) {
-        MarkdownConverter markdownConverter = new MarkdownConverter(content);
+        MarkdownConverterOG markdownConverter = new MarkdownConverterOG(content);
         return CompletableFuture.completedFuture(markdownConverter.toString());
     }
 }
