@@ -4,8 +4,9 @@ import java.util.*;
 public class MarkdownTreeNode {
 
     // getter setter
-    public List<MarkdownTree> markdownTrees;
+    public Node val;
+    public List<MarkdownTreeNode> markdownTreeNodes = new ArrayList<>();
 
-    public MarkdownTree() {
+    public MarkdownTreeNode() {
     }
 }
